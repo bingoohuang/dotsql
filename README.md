@@ -1,4 +1,4 @@
-dotsql [![Build Status](https://travis-ci.org/gchaincl/dotsql.svg)](https://travis-ci.org/gchaincl/dotsql)
+dotsql [![Build Status](https://travis-ci.org/bingoohuang/dotsql.svg)](https://travis-ci.org/bingoohuang/dotsql)
 ======
 
 A Golang library for using SQL.
@@ -6,17 +6,19 @@ A Golang library for using SQL.
 It is not an ORM, it is not a query builder. Dotsql is a library that helps you
 keep sql files in one place and use it with ease.
 
-_Dotsql is heavily inspired by_ [yesql](https://github.com/krisajenkins/yesql).
+Dotsql is heavily inspired by_ [yesql](https://github.com/krisajenkins/yesql).
 
 Installation
---
-Simple install the package to your `$GOPATH` with the `go` tool from shell:
+-:-
+Simple install the package to your `$GOPATH` with the `go` tool from shell
+
 ```bash
 $ go get github.com/gchaincl/dotsql
 ```
+
 Make sure Git is installed on your machine and in your system's `$PATH`
 
-Usage [![GoDoc](https://godoc.org/github.com/gchaincl/dotsql?status.svg)](https://godoc.org/github.com/gchaincl/dotsql)
+Usage [![GoDoc](https://godoc.org/github.com/bingoohuang/dotsql?status.svg)](https://godoc.org/github.com/gchaincl/dotsql)
 --
 
 First of all, you need to define queries into a file:
@@ -83,10 +85,5 @@ go test
 
 Embeding
 --
-To avoid distributing `sql` files with the binary, you will need to embed into it, tools like [gotic](https://github.com/gchaincl/gotic) may help
+To avoid distributing `sql` files with the binary, you will need to embed into it, tools like [statical](https://github.com/bingoohuang/statical) may help
 
-TODO
-----
-
-- [ ] Enable text interpolation inside queries using `text/template`
-- [ ] `sqlx` integration

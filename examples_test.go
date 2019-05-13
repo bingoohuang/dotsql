@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"log"
 
-	"github.com/gchaincl/dotsql"
+	"dotsql"
 )
 
 func ExampleLoadFromFile() {

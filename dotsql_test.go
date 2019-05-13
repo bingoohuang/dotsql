@@ -1,6 +1,7 @@
-package dotsql
+package dotsql_test
 
 import (
+	"dotsql"
 	"strings"
 	"testing"
 )
@@ -12,19 +13,19 @@ func failIfError(t *testing.T, err error) {
 }
 
 func TestLoad(t *testing.T) {
-	_, err := Load(strings.NewReader(""))
+	_, err := dotsql.Load(strings.NewReader(""))
 	failIfError(t, err)
 }
 
 func TestLoadFromString(t *testing.T) {
-	_, err := LoadFromString("")
+	_, err := dotsql.LoadFromString("")
 	failIfError(t, err)
 }
 
 func TestRaw(t *testing.T) {
 	expectedQuery := "SELECT 1+1"
 
-	dot, err := LoadFromString("--name: my-query\n" + expectedQuery)
+	dot, err := dotsql.LoadFromString("--name: my-query\n" + expectedQuery)
 	failIfError(t, err)
 
 	got, err := dot.Raw("my-query")
@@ -42,7 +43,7 @@ func TestQueries(t *testing.T) {
 		"insert": "INSERT INTO users (?, ?, ?)",
 	}
 
-	dot, err := LoadFromString(`
+	dot, err := dotsql.LoadFromString(`
 	-- name: select
 	SELECT * from users
 
@@ -70,13 +71,13 @@ func TestMergeHaveBothQueries(t *testing.T) {
 		"query-b": "SELECT * FROM b",
 	}
 
-	a, err := LoadFromString("--name: query-a\nSELECT * FROM a")
+	a, err := dotsql.LoadFromString("--name: query-a\nSELECT * FROM a")
 	failIfError(t, err)
 
-	b, err := LoadFromString("--name: query-b\nSELECT * FROM b")
+	b, err := dotsql.LoadFromString("--name: query-b\nSELECT * FROM b")
 	failIfError(t, err)
 
-	c := Merge(a, b)
+	c := dotsql.Merge(a, b)
 
 	got := c.QueryMap()
 	if len(got) != len(expectedQueryMap) {
@@ -87,16 +88,16 @@ func TestMergeHaveBothQueries(t *testing.T) {
 func TestMergeTakesPresecendeFromLastArgument(t *testing.T) {
 	expectedQuery := "SELECT * FROM c"
 
-	a, err := LoadFromString("--name: query\nSELECT * FROM a")
+	a, err := dotsql.LoadFromString("--name: query\nSELECT * FROM a")
 	failIfError(t, err)
 
-	b, err := LoadFromString("--name: query\nSELECT * FROM b")
+	b, err := dotsql.LoadFromString("--name: query\nSELECT * FROM b")
 	failIfError(t, err)
 
-	c, err := LoadFromString("--name: query\nSELECT * FROM c")
+	c, err := dotsql.LoadFromString("--name: query\nSELECT * FROM c")
 	failIfError(t, err)
 
-	x := Merge(a, b, c)
+	x := dotsql.Merge(a, b, c)
 
 	got := x.QueryMap()["query"]
 	if expectedQuery != got {

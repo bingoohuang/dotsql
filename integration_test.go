@@ -1,6 +1,6 @@
 // +build integration
 
-package dotsql
+package dotsql_test
 
 import (
 	"database/sql"
