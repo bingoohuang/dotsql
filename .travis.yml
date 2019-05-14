@@ -4,5 +4,5 @@ go:
 env:
   - GO111MODULE=on
 
-install: go get -t -tags integration ./...
+install: true
 script: go test -tags integration

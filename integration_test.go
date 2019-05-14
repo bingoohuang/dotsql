@@ -5,17 +5,18 @@ package dotsql_test
 import (
 	"database/sql"
 	"testing"
+	"dotsql"
 
-	_ "github.com/mxk/go-sqlite/sqlite3"
+	_ "github.com/mattn/go-sqlite3"
 )
 
-func initDotSql() (*sql.DB, *DotSql) {
+func initDotSql() (*sql.DB, *dotsql.DotSql) {
 	db, err := sql.Open("sqlite3", ":memory:")
 	if err != nil {
 		panic(err)
 	}
 
-	dotsql, err := LoadFromFile("test_schema.sql")
+	dotsql, err := dotsql.LoadFromFile("test_schema.sql")
 	if err != nil {
 		panic(err)
 	}
